@@ -39,11 +39,13 @@ function initScraper() {
     lastSelector   = selector;
 
     try {
-      const matches = Array.from(document.querySelectorAll(selector));
+      const matches = Array.from(document.querySelectorAll(selector))
+        .filter(match => !isOwnElement(match));
       return { selector, elements: matches };
     } catch (_) {
       const parent   = el.parentElement || document.body;
-      const siblings = Array.from(parent.querySelectorAll(el.tagName.toLowerCase()));
+      const siblings = Array.from(parent.querySelectorAll(el.tagName.toLowerCase()))
+        .filter(match => !isOwnElement(match));
       lastSelector   = el.tagName.toLowerCase();
       return { selector: el.tagName.toLowerCase(), elements: siblings };
     }
