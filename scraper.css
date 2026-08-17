@@ -1,0 +1,117 @@
+/* ============================================================
+   scraper.css — LocalScrape injected styles
+   Namespaced with .ls- prefix to avoid collisions
+   ============================================================ */
+
+/* Hover highlight — shown on mouseover */
+.ls-hover-highlight {
+  outline: 2px solid #63b3ed !important;
+  outline-offset: 2px !important;
+  background-color: rgba(99, 179, 237, 0.08) !important;
+  cursor: crosshair !important;
+  transition: outline 0.1s ease, background-color 0.1s ease !important;
+}
+
+/* Selected element — after click extraction */
+.ls-selected-highlight {
+  outline: 2px solid #68d391 !important;
+  outline-offset: 2px !important;
+  background-color: rgba(104, 211, 145, 0.1) !important;
+  cursor: crosshair !important;
+}
+
+/* ── Toast notification ───────────────────────────────────── */
+#ls-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  z-index: 2147483647;
+  background: rgba(13, 15, 20, 0.92);
+  color: #e2e8f0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(99, 179, 237, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  white-space: nowrap;
+}
+
+#ls-toast.ls-toast-show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+#ls-toast .ls-toast-count {
+  color: #63b3ed;
+  font-weight: 700;
+}
+
+/* ── Scraping active banner ───────────────────────────────── */
+#ls-banner {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 2147483647;
+  background: rgba(13, 15, 20, 0.9);
+  color: #e2e8f0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(99, 179, 237, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(99, 179, 237, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: default;
+  animation: ls-slide-in 0.3s ease;
+}
+
+@keyframes ls-slide-in {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+#ls-banner .ls-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #63b3ed;
+  animation: ls-pulse 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes ls-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.75); }
+}
+
+#ls-banner .ls-stop-btn {
+  background: rgba(252, 129, 129, 0.15);
+  border: 1px solid rgba(252, 129, 129, 0.3);
+  color: #fc8181;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+#ls-banner .ls-stop-btn:hover {
+  background: rgba(252, 129, 129, 0.28);
+}
