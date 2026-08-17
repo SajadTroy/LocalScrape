@@ -25,6 +25,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         sendResponse({ success: false, error: err.message });
       }
     })();
+  } else if (message.type === 'OPEN_SPONSOR') {
+    chrome.tabs.create({ url: 'https://github.com/sponsors/SajadTroy' });
+    sendResponse({ success: true });
     return true;
   }
 });
