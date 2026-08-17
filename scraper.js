@@ -76,7 +76,7 @@ function initScraper() {
     banner.id = 'ls-banner';
     banner.innerHTML = `
       <div class="ls-dot"></div>
-      <span class="ls-banner-text">LocalScrape active — click any element</span>
+      <span class="ls-banner-text">Click any Element</span>
       <div class="ls-banner-actions">
         <button class="ls-cancel-btn" id="ls-cancel-btn">Cancel</button>
       </div>
@@ -252,11 +252,11 @@ function initScraper() {
 
     const banner = document.getElementById('ls-banner');
     if (banner) {
-      banner.querySelector('.ls-banner-text').textContent = 'LocalScrape active — click any element';
+      banner.querySelector('.ls-banner-text').textContent = 'Click any Element';
       banner.querySelector('.ls-banner-actions').innerHTML = `
-        <button class="ls-stop-btn" id="ls-stop-btn">Stop</button>
+        <button class="ls-cancel-btn" id="ls-cancel-btn">Cancel</button>
       `;
-      document.getElementById('ls-stop-btn').addEventListener('click', () => cleanup());
+      document.getElementById('ls-cancel-btn').addEventListener('click', () => cleanup());
     }
 
     showToast('Selection cleared — pick a new element', 2000);

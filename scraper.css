@@ -69,10 +69,16 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  width: 480px;
+  width: 540px;
   box-sizing: border-box;
   cursor: default;
   animation: ls-slide-in 0.3s ease;
+}
+
+#ls-banner .ls-banner-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @keyframes ls-slide-in {
@@ -132,6 +138,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
+  white-space: nowrap;
 }
 
 .ls-action-btn:hover {
@@ -154,7 +161,7 @@
   position: fixed;
   top: 96px;
   right: 24px;
-  width: 480px;
+  width: 540px;
   max-height: calc(100vh - 132px);
   z-index: 2147483646;
   background: #FCFCFD;
