@@ -18,12 +18,11 @@ LocalScrape is a Chrome extension that lets you visually select elements on any 
 
 - **Visual element picker** — hover over any element to highlight it with a blue outline
 - **Smart similarity matching** — click once to extract all elements sharing the same CSS selector
-- **In-page preview** — view and verify extracted data directly on the page without opening the popup
+- **In-page preview** — view and verify extracted data directly on the page
 - **CSV & JSON export** — RFC-4180 compliant CSV or structured JSON, your choice
 - **100% local** - no server, no account, no analytics
-- **Keyboard shortcuts** - `Escape` to stop, `Ctrl/Cmd+Z` to undo a selection and pick again
+- **Keyboard shortcuts** - `Escape` to cancel, `Ctrl/Cmd+Z` to undo a selection and pick again
 - **Instant download** - files saved directly to your Downloads folder via the browser
-- **State restoration** - reopen the popup at any time to see your last extraction
 
 ---
 
@@ -47,13 +46,11 @@ LocalScrape is a Chrome extension that lets you visually select elements on any 
 
 | Step | Action |
 |------|--------|
-| **1** | Click the LocalScrape icon in the Chrome toolbar |
-| **2** | Click **Start Scraping** - the popup closes and the page becomes interactive |
-| **3** | Move your mouse over the page - elements highlight in **blue** as you hover |
-| **4** | Click the element you want to extract — all similar elements highlight in **green** |
-| **5** | You can preview data using **Open Selection** or try again using **Reselect** right from the banner |
-| **6** | Click the LocalScrape icon again to reopen the popup |
-| **7** | Choose **CSV** or **JSON**, then click **Download** |
+| **1** | Click the LocalScrape icon in the Chrome toolbar to activate the scraper |
+| **2** | Move your mouse over the page - elements highlight in **blue** as you hover |
+| **3** | Click the element you want to extract — all similar elements highlight in **green** |
+| **4** | Preview your data by clicking **Open Selection** on the floating banner |
+| **5** | Click **Download CSV** or **Download JSON** directly from the results panel |
 
 ### Keyboard Shortcuts
 
@@ -93,13 +90,10 @@ No `<all_urls>` host permission is requested. LocalScrape only activates on the 
 LocalScrape/
 ├── .github/FUNDING.yml   # GitHub Sponsors config
 ├── icons/                # Extension icons (16, 48, 128px)
-├── background.js         # Service worker - handles file downloads
+├── background.js         # Service worker - handles script injection and file downloads
 ├── manifest.json         # Manifest V3 config
-├── popup.html            # Extension popup UI
-├── popup.css             # Popup styles
-├── popup.js              # Popup logic
-├── scraper.css           # Injected page styles
-└── scraper.js            # Injected scraping engine
+├── scraper.css           # Injected page styles (flat minimal theme)
+└── scraper.js            # Injected scraping engine and UI logic
 ```
 
 ---
