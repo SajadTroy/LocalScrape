@@ -123,7 +123,7 @@
   margin-left: 10px;
 }
 
-#ls-banner .ls-action-btn {
+.ls-action-btn {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.15);
   color: #e2e8f0;
@@ -139,7 +139,7 @@
   gap: 5px;
 }
 
-#ls-banner .ls-action-btn:hover {
+.ls-action-btn:hover {
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.3);
 }

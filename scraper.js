@@ -221,8 +221,20 @@ function initScraper() {
           <span class="ls-panel-selector">${selector}</span>
         </div>
         <div class="ls-panel-actions">
-          <button class="ls-action-btn ls-download-csv" id="ls-dl-csv">CSV</button>
-          <button class="ls-action-btn ls-download-json" id="ls-dl-json">JSON</button>
+          <button class="ls-action-btn ls-download-csv" id="ls-dl-csv">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 15L12 3M12 15L8.5 11.5M12 15L15.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M20 21H4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Download CSV
+          </button>
+          <button class="ls-action-btn ls-download-json" id="ls-dl-json">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 15L12 3M12 15L8.5 11.5M12 15L15.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M20 21H4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Download JSON
+          </button>
         </div>
       </div>
       <div class="ls-panel-list">${rows}${overflow}</div>

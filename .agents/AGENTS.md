@@ -42,17 +42,7 @@ LocalScrape/
 ├── background.js            # Service worker. Listens for DOWNLOAD_FILE messages from the popup
 │                            # and calls chrome.downloads.download to save CSV or JSON files locally.
 ├── manifest.json            # Manifest V3 configuration. Declares name, permissions, icons,
-│                            # service worker, and action popup.
-├── popup.css                # Styles for popup.html. Premium dark glassmorphism design with gradient
-│                            # buttons, pulsing status badge, results preview panel, format toggle,
-│                            # and a pink sponsor link button in the footer.
-├── popup.html               # The extension popup. Shows instructions, extracted results preview,
-│                            # CSV/JSON format selector, Start / Stop / Download / Clear buttons,
-│                            # and a "Support on GitHub" sponsor link in the footer.
-├── popup.js                 # Controls popup UI state. Injects scraper.css and scraper.js into the
-│                            # active tab on Start, listens for LS_DATA / LS_PING responses to restore
-│                            # state when the popup is reopened, triggers file download via background.js,
-│                            # and opens the GitHub Sponsors page via chrome.tabs.create.
+│                            # and background service worker.
 ├── scraper.css              # Injected into the active tab. Provides namespaced .ls-* styles for the
 │                            # blue hover outline, green selected outline, toast pill, and active banner.
 ├── scraper.js               # Injected into the active tab. Handles mouseover highlight, click-to-extract,
@@ -80,26 +70,11 @@ Permissions currently in use:
 ### `background.js`
 The extension's service worker. Must store no state in global variables (service workers are ephemeral).
 Responsibilities:
-- Listens for `DOWNLOAD_FILE` messages from `popup.js`.
+- Listens for `chrome.action.onClicked`.
+- Uses `chrome.scripting.insertCSS` and `chrome.scripting.executeScript` to inject `scraper.css` and `scraper.js` into the active tab.
+- Listens for `DOWNLOAD_FILE` messages from `scraper.js`.
 - Calls `chrome.downloads.download` with the provided `dataUrl` and `filename`.
 - Sends a `{ success }` response back to the caller.
-
-### `popup.html` + `popup.css`
-The extension's action popup. Shown when the user clicks the toolbar icon.
-`popup.html` contains four UI sections: an instructions card, a results card (hidden until data arrives), a CSV/JSON format toggle, and action buttons (Start, Stop, Download, Clear).
-`popup.css` applies a dark glassmorphism theme using CSS custom properties, a radial gradient background glow, smooth button transitions, and a pulsing status badge.
-
-### `popup.js`
-Controls all popup behaviour.
-Responsibilities:
-- On **Start**: calls `chrome.scripting.insertCSS` then `chrome.scripting.executeScript` to inject `scraper.css` and `scraper.js` into the active tab, then closes the popup so the user can interact with the page.
-- On **popup open**: sends an `LS_PING` message to detect whether the scraper is already running and restores the correct UI state (active scraping or completed results).
-- Listens for `LS_DATA` messages from `scraper.js` and renders the results card with item count, selector, and a scrollable preview list.
-- On **Download**: serialises `scrapedData` to CSV (RFC-4180 quoting) or JSON, encodes via `FileReader.readAsDataURL`, and sends a `DOWNLOAD_FILE` message to `background.js`.
-- On **Stop / Clear**: sends `LS_STOP` to `scraper.js` and resets all UI to the idle state.
-
-### `scraper.js`
-The core data-extraction content script. Injected programmatically by `popup.js`.
 Uses `window.__localScrapeActive` as a double-injection guard.
 Responsibilities:
 - Attaches `mouseover`, `mouseout`, `click`, and `keydown` listeners in capture phase for page-wide coverage.
