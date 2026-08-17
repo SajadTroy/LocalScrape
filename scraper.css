@@ -1,45 +1,41 @@
 /* ============================================================
    scraper.css — LocalScrape injected styles
    Namespaced with .ls- prefix to avoid collisions
+   Clean, flat, eye-friendly minimal theme
    ============================================================ */
 
 /* Hover highlight — shown on mouseover */
 .ls-hover-highlight {
-  outline: 2px solid #63b3ed !important;
+  outline: 2px solid #2970FF !important;
   outline-offset: 2px !important;
-  background-color: rgba(99, 179, 237, 0.08) !important;
+  background-color: rgba(41, 112, 255, 0.05) !important;
   cursor: crosshair !important;
   transition: outline 0.1s ease, background-color 0.1s ease !important;
 }
 
 /* Selected element — after click extraction */
 .ls-selected-highlight {
-  outline: 2px solid #68d391 !important;
+  outline: 2px solid #039855 !important;
   outline-offset: 2px !important;
-  background-color: rgba(104, 211, 145, 0.1) !important;
+  background-color: rgba(3, 152, 85, 0.05) !important;
   cursor: crosshair !important;
 }
 
 /* ── Toast notification ───────────────────────────────────── */
 #ls-toast {
   position: fixed;
-  bottom: 24px;
+  bottom: 32px;
   left: 50%;
   transform: translateX(-50%) translateY(20px);
   z-index: 2147483647;
-  background: rgba(13, 15, 20, 0.92);
-  color: #e2e8f0;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  font-size: 13px;
+  background: #FCFCFD;
+  color: #344054;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 14px;
   font-weight: 500;
-  padding: 10px 20px;
-  border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(99, 179, 237, 0.15);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: 1px solid #D0D5DD;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.25s ease, transform 0.25s ease;
@@ -52,30 +48,29 @@
 }
 
 #ls-toast .ls-toast-count {
-  color: #63b3ed;
-  font-weight: 700;
+  color: #2970FF;
+  font-weight: 600;
 }
 
 /* ── Scraping active banner ───────────────────────────────── */
 #ls-banner {
   position: fixed;
-  top: 16px;
-  right: 16px;
+  top: 24px;
+  right: 24px;
   z-index: 2147483647;
-  background: rgba(13, 15, 20, 0.9);
-  color: #e2e8f0;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 8px 14px;
-  border-radius: 10px;
-  border: 1px solid rgba(99, 179, 237, 0.3);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(99, 179, 237, 0.1);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: #FCFCFD;
+  color: #344054;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #D0D5DD;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
+  width: 480px;
+  box-sizing: border-box;
   cursor: default;
   animation: ls-slide-in 0.3s ease;
 }
@@ -89,7 +84,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #63b3ed;
+  background: #2970FF;
   animation: ls-pulse 1.8s ease-in-out infinite;
   flex-shrink: 0;
 }
@@ -100,76 +95,72 @@
 }
 
 #ls-banner .ls-stop-btn {
-  background: rgba(252, 129, 129, 0.15);
-  border: 1px solid rgba(252, 129, 129, 0.3);
-  color: #fc8181;
+  background: #FEF3F2;
+  border: 1px solid #FECDCA;
+  color: #B42318;
   font-family: inherit;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 3px 9px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 12px;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
 #ls-banner .ls-stop-btn:hover {
-  background: rgba(252, 129, 129, 0.28);
+  background: #FEE4E2;
 }
 
 #ls-banner .ls-banner-actions {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-left: 10px;
+  gap: 8px;
+  margin-left: auto;
 }
 
 .ls-action-btn {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #e2e8f0;
+  background: #FFFFFF;
+  border: 1px solid #D0D5DD;
+  color: #344054;
   font-family: inherit;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 4px 10px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 12px;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.15s ease;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
 
 .ls-action-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: #F9FAFB;
+  border-color: #98A2B3;
 }
 
 #ls-banner .ls-open-btn {
-  color: #63b3ed;
-  border-color: rgba(99, 179, 237, 0.3);
-  background: rgba(99, 179, 237, 0.1);
+  color: #2970FF;
+  background: #EFF4FF;
+  border-color: #B2CCFF;
 }
 
 #ls-banner .ls-open-btn:hover {
-  background: rgba(99, 179, 237, 0.2);
-  border-color: rgba(99, 179, 237, 0.5);
+  background: #D1E0FF;
 }
 
 /* ── Selection Panel ──────────────────────────────────────── */
 #ls-panel {
   position: fixed;
-  top: 60px;
-  right: 16px;
-  width: 380px;
-  max-height: calc(100vh - 80px);
+  top: 84px;
+  right: 24px;
+  width: 480px;
+  max-height: calc(100vh - 120px);
   z-index: 2147483646;
-  background: rgba(13, 15, 20, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: #FCFCFD;
+  border: 1px solid #D0D5DD;
+  border-radius: 8px;
+  font-family: system-ui, -apple-system, sans-serif;
   display: flex;
   flex-direction: column;
   opacity: 0;
@@ -186,26 +177,29 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 16px 24px;
+  border-bottom: 1px solid #EAECF0;
+  background: #FFFFFF;
+  border-radius: 8px 8px 0 0;
 }
 
 .ls-panel-title {
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: #e2e8f0;
-  font-size: 13px;
+  gap: 12px;
+  color: #101828;
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .ls-panel-selector {
   font-family: 'Courier New', monospace;
-  font-size: 11px;
-  color: #a0aec0;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 2px 6px;
+  font-size: 12px;
+  color: #475467;
+  background: #F2F4F7;
+  padding: 4px 8px;
   border-radius: 4px;
-  max-width: 150px;
+  max-width: 140px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -214,15 +208,15 @@
 .ls-panel-actions {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .ls-panel-list {
-  padding: 12px;
+  padding: 16px 24px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .ls-panel-list::-webkit-scrollbar {
@@ -232,44 +226,48 @@
   background: transparent;
 }
 .ls-panel-list::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: #D0D5DD;
   border-radius: 3px;
+}
+.ls-panel-list::-webkit-scrollbar-thumb:hover {
+  background: #98A2B3;
 }
 
 .ls-panel-row {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  padding: 6px 10px;
-  background: rgba(255, 255, 255, 0.03);
+  gap: 12px;
+  padding: 12px 16px;
+  background: #FFFFFF;
+  border: 1px solid #EAECF0;
   border-radius: 6px;
-  border-left: 2px solid rgba(99, 179, 237, 0.4);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
 .ls-panel-row:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: #F9FAFB;
+  border-color: #D0D5DD;
 }
 
 .ls-panel-index {
-  color: #63b3ed;
-  font-size: 10px;
-  font-weight: 700;
-  min-width: 16px;
+  color: #667085;
+  font-size: 12px;
+  font-weight: 500;
+  min-width: 24px;
   margin-top: 2px;
 }
 
 .ls-panel-text {
-  color: #cbd5e0;
-  font-size: 12px;
-  line-height: 1.4;
+  color: #344054;
+  font-size: 14px;
+  line-height: 1.5;
   word-break: break-word;
 }
 
 .ls-panel-overflow {
   text-align: center;
-  color: #718096;
-  font-size: 11px;
-  padding: 8px 0 4px;
-  font-style: italic;
+  color: #475467;
+  font-size: 13px;
+  padding: 16px 0 8px;
+  font-weight: 500;
 }
-

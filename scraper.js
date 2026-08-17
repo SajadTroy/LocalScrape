@@ -212,10 +212,10 @@ function initScraper() {
       <div class="ls-panel-header">
         <div class="ls-panel-title">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <rect x="1" y="1" width="12" height="12" rx="2.5" stroke="#63b3ed" stroke-width="1.4"/>
-            <line x1="4" y1="5" x2="10" y2="5" stroke="#63b3ed" stroke-width="1.2" stroke-linecap="round"/>
-            <line x1="4" y1="7.5" x2="10" y2="7.5" stroke="#63b3ed" stroke-width="1.2" stroke-linecap="round"/>
-            <line x1="4" y1="10" x2="8" y2="10" stroke="#63b3ed" stroke-width="1.2" stroke-linecap="round"/>
+            <rect x="1" y="1" width="12" height="12" rx="2.5" stroke="#2970FF" stroke-width="1.4"/>
+            <line x1="4" y1="5" x2="10" y2="5" stroke="#2970FF" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="4" y1="7.5" x2="10" y2="7.5" stroke="#2970FF" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="4" y1="10" x2="8" y2="10" stroke="#2970FF" stroke-width="1.2" stroke-linecap="round"/>
           </svg>
           <strong>${data.length} item${data.length !== 1 ? 's' : ''}</strong>
           <span class="ls-panel-selector">${selector}</span>
