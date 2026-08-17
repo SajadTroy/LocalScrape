@@ -211,23 +211,10 @@
   text-overflow: ellipsis;
 }
 
-.ls-panel-close {
-  background: transparent;
-  border: none;
-  color: #a0aec0;
-  font-size: 14px;
-  cursor: pointer;
-  padding: 4px;
-  border-radius: 4px;
-  transition: all 0.2s;
+.ls-panel-actions {
   display: flex;
   align-items: center;
-  justify-content: center;
-}
-
-.ls-panel-close:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  gap: 6px;
 }
 
 .ls-panel-list {

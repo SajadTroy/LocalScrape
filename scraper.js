@@ -113,8 +113,28 @@ function initScraper() {
       <button class="ls-stop-btn" id="ls-stop-btn">Stop</button>
     `;
 
-    document.getElementById('ls-open-btn').addEventListener('click', () => {
-      showSelectionPanel(scrapedData, lastSelector);
+    let isPanelOpen = false;
+    document.getElementById('ls-open-btn').addEventListener('click', (e) => {
+      isPanelOpen = !isPanelOpen;
+      const btn = e.currentTarget;
+      if (isPanelOpen) {
+        btn.innerHTML = `
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 10L10 2M2 2l8 8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+          Close Selection
+        `;
+        showSelectionPanel(scrapedData, lastSelector);
+      } else {
+        btn.innerHTML = `
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="1" y="1" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.4"/>
+            <path d="M4 6h4M6 4v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+          Open Selection
+        `;
+        hideSelectionPanel();
+      }
     });
 
     document.getElementById('ls-reselect-btn').addEventListener('click', () => {
@@ -128,6 +148,47 @@ function initScraper() {
 
   function removeBanner() {
     document.getElementById('ls-banner')?.remove();
+  }
+
+  function hideSelectionPanel() {
+    const panel = document.getElementById('ls-panel');
+    if (panel) {
+      panel.classList.remove('ls-panel-visible');
+      setTimeout(() => panel.remove(), 250);
+    }
+  }
+
+  function triggerDownload(format) {
+    if (!scrapedData.length) return;
+
+    let content, mimeType, ext;
+
+    if (format === 'csv') {
+      const header = 'text\n';
+      const rows   = scrapedData
+        .map(t => `"${t.replace(/"/g, '""').replace(/\n/g, ' ').trim()}"`)
+        .join('\n');
+      content  = header + rows;
+      mimeType = 'text/csv;charset=utf-8;';
+      ext      = 'csv';
+    } else {
+      content  = JSON.stringify(scrapedData.map(t => ({ text: t.trim() })), null, 2);
+      mimeType = 'application/json';
+      ext      = 'json';
+    }
+
+    const blob   = new Blob([content], { type: mimeType });
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      const dataUrl   = reader.result;
+      const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
+      const filename  = `localscrape-${timestamp}.${ext}`;
+      chrome.runtime.sendMessage({ type: 'DOWNLOAD_FILE', dataUrl, filename });
+      showToast(`Downloading ${filename}...`, 2000);
+    };
+
+    reader.readAsDataURL(blob);
   }
 
   function showSelectionPanel(data, selector) {
@@ -144,7 +205,7 @@ function initScraper() {
     `).join('');
 
     const overflow = data.length > 50
-      ? `<div class="ls-panel-overflow">+ ${data.length - 50} more — open extension popup to download all</div>`
+      ? `<div class="ls-panel-overflow">+ ${data.length - 50} more items</div>`
       : '';
 
     panel.innerHTML = `
@@ -159,7 +220,10 @@ function initScraper() {
           <strong>${data.length} item${data.length !== 1 ? 's' : ''}</strong>
           <span class="ls-panel-selector">${selector}</span>
         </div>
-        <button class="ls-panel-close" id="ls-panel-close" title="Close">✕</button>
+        <div class="ls-panel-actions">
+          <button class="ls-action-btn ls-download-csv" id="ls-dl-csv">CSV</button>
+          <button class="ls-action-btn ls-download-json" id="ls-dl-json">JSON</button>
+        </div>
       </div>
       <div class="ls-panel-list">${rows}${overflow}</div>
     `;
@@ -168,10 +232,8 @@ function initScraper() {
 
     requestAnimationFrame(() => panel.classList.add('ls-panel-visible'));
 
-    document.getElementById('ls-panel-close').addEventListener('click', () => {
-      panel.classList.remove('ls-panel-visible');
-      setTimeout(() => panel.remove(), 250);
-    });
+    document.getElementById('ls-dl-csv').addEventListener('click', () => triggerDownload('csv'));
+    document.getElementById('ls-dl-json').addEventListener('click', () => triggerDownload('json'));
   }
 
   function triggerReselect() {
