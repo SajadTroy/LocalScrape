@@ -16,14 +16,14 @@ LocalScrape is a Chrome extension that lets you visually select elements on any 
 
 ## Features
 
-- 🎯 **Visual element picker** — hover over any element to highlight it with a blue outline
-- ⚡ **Smart similarity matching** — click once to extract all elements sharing the same CSS selector
-- 🔍 **In-page preview** — view and verify extracted data directly on the page without opening the popup
-- 📄 **CSV & JSON export** — RFC-4180 compliant CSV or structured JSON, your choice
-- 🔒 **100% local** - no server, no account, no analytics
-- ⌨️ **Keyboard shortcuts** - `Escape` to stop, `Ctrl/Cmd+Z` to undo a selection and pick again
-- 💾 **Instant download** - files saved directly to your Downloads folder via the browser
-- 🔁 **State restoration** - reopen the popup at any time to see your last extraction
+- **Visual element picker** — hover over any element to highlight it with a blue outline
+- **Smart similarity matching** — click once to extract all elements sharing the same CSS selector
+- **In-page preview** — view and verify extracted data directly on the page without opening the popup
+- **CSV & JSON export** — RFC-4180 compliant CSV or structured JSON, your choice
+- **100% local** - no server, no account, no analytics
+- **Keyboard shortcuts** - `Escape` to stop, `Ctrl/Cmd+Z` to undo a selection and pick again
+- **Instant download** - files saved directly to your Downloads folder via the browser
+- **State restoration** - reopen the popup at any time to see your last extraction
 
 ---
 
