@@ -1,10 +1,10 @@
-# LocalScrape — Visual Web Scraper
+# LocalScrape - Visual Web Scraper
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Manifest V3](https://img.shields.io/badge/Manifest-V3-brightgreen.svg)](manifest.json)
 [![GitHub Sponsors](https://img.shields.io/badge/Sponsor-%E2%9D%A4-ea4aaa?logo=github-sponsors)](https://github.com/sponsors/SajadTroy)
 
-> **Hover. Click. Download.** Extract data from any webpage in seconds — no code, no cloud, no tracking.
+> **Hover. Click. Download.** Extract data from any webpage in seconds - no code, no cloud, no tracking.
 
 ---
 
@@ -18,11 +18,12 @@ LocalScrape is a Chrome extension that lets you visually select elements on any 
 
 - 🎯 **Visual element picker** — hover over any element to highlight it with a blue outline
 - ⚡ **Smart similarity matching** — click once to extract all elements sharing the same CSS selector
+- 🔍 **In-page preview** — view and verify extracted data directly on the page without opening the popup
 - 📄 **CSV & JSON export** — RFC-4180 compliant CSV or structured JSON, your choice
-- 🔒 **100% local** — no server, no account, no analytics
-- ⌨️ **Keyboard shortcuts** — `Escape` to stop, `Ctrl/Cmd+Z` to undo a selection and pick again
-- 💾 **Instant download** — files saved directly to your Downloads folder via the browser
-- 🔁 **State restoration** — reopen the popup at any time to see your last extraction
+- 🔒 **100% local** - no server, no account, no analytics
+- ⌨️ **Keyboard shortcuts** - `Escape` to stop, `Ctrl/Cmd+Z` to undo a selection and pick again
+- 💾 **Instant download** - files saved directly to your Downloads folder via the browser
+- 🔁 **State restoration** - reopen the popup at any time to see your last extraction
 
 ---
 
@@ -47,11 +48,12 @@ LocalScrape is a Chrome extension that lets you visually select elements on any 
 | Step | Action |
 |------|--------|
 | **1** | Click the LocalScrape icon in the Chrome toolbar |
-| **2** | Click **Start Scraping** — the popup closes and the page becomes interactive |
-| **3** | Move your mouse over the page — elements highlight in **blue** as you hover |
+| **2** | Click **Start Scraping** - the popup closes and the page becomes interactive |
+| **3** | Move your mouse over the page - elements highlight in **blue** as you hover |
 | **4** | Click the element you want to extract — all similar elements highlight in **green** |
-| **5** | Click the LocalScrape icon again to reopen the popup |
-| **6** | Choose **CSV** or **JSON**, then click **Download** |
+| **5** | You can preview data using **Open Selection** or try again using **Reselect** right from the banner |
+| **6** | Click the LocalScrape icon again to reopen the popup |
+| **7** | Choose **CSV** or **JSON**, then click **Download** |
 
 ### Keyboard Shortcuts
 
@@ -91,7 +93,7 @@ No `<all_urls>` host permission is requested. LocalScrape only activates on the 
 LocalScrape/
 ├── .github/FUNDING.yml   # GitHub Sponsors config
 ├── icons/                # Extension icons (16, 48, 128px)
-├── background.js         # Service worker — handles file downloads
+├── background.js         # Service worker - handles file downloads
 ├── manifest.json         # Manifest V3 config
 ├── popup.html            # Extension popup UI
 ├── popup.css             # Popup styles
@@ -104,7 +106,7 @@ LocalScrape/
 
 ## Development
 
-No build step required — this is vanilla HTML, CSS, and JavaScript.
+No build step required - this is vanilla HTML, CSS, and JavaScript.
 
 1. Make your changes
 2. Go to `chrome://extensions`

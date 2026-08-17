@@ -14,7 +14,10 @@ function initScraper() {
   let isDone       = false;
 
   function isOwnElement(el) {
-    return el.id === 'ls-toast' || el.id === 'ls-banner' || el.closest?.('#ls-toast, #ls-banner');
+    return el.id === 'ls-toast'
+      || el.id === 'ls-banner'
+      || el.id === 'ls-panel'
+      || el.closest?.('#ls-toast, #ls-banner, #ls-panel');
   }
 
   function buildSelector(el) {
@@ -73,8 +76,10 @@ function initScraper() {
     banner.id = 'ls-banner';
     banner.innerHTML = `
       <div class="ls-dot"></div>
-      <span>LocalScrape active — click any element</span>
-      <button class="ls-stop-btn" id="ls-stop-btn">Stop</button>
+      <span class="ls-banner-text">LocalScrape active — click any element</span>
+      <div class="ls-banner-actions">
+        <button class="ls-stop-btn" id="ls-stop-btn">Stop</button>
+      </div>
     `;
     document.body.appendChild(banner);
 
@@ -83,8 +88,108 @@ function initScraper() {
     });
   }
 
+  function updateBannerDone(count) {
+    const banner = document.getElementById('ls-banner');
+    if (!banner) return;
+
+    banner.querySelector('.ls-banner-text').textContent =
+      `${count} item${count !== 1 ? 's' : ''} ready`;
+
+    banner.querySelector('.ls-banner-actions').innerHTML = `
+      <button class="ls-action-btn ls-open-btn" id="ls-open-btn">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1" y="1" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M4 6h4M6 4v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        Open Selection
+      </button>
+      <button class="ls-action-btn ls-reselect-btn" id="ls-reselect-btn">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 6a4 4 0 1 1 1.17 2.83" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M2 9.5V6.5H5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Reselect
+      </button>
+      <button class="ls-stop-btn" id="ls-stop-btn">Stop</button>
+    `;
+
+    document.getElementById('ls-open-btn').addEventListener('click', () => {
+      showSelectionPanel(scrapedData, lastSelector);
+    });
+
+    document.getElementById('ls-reselect-btn').addEventListener('click', () => {
+      triggerReselect();
+    });
+
+    document.getElementById('ls-stop-btn').addEventListener('click', () => {
+      cleanup();
+    });
+  }
+
   function removeBanner() {
     document.getElementById('ls-banner')?.remove();
+  }
+
+  function showSelectionPanel(data, selector) {
+    document.getElementById('ls-panel')?.remove();
+
+    const panel = document.createElement('div');
+    panel.id = 'ls-panel';
+
+    const rows = data.slice(0, 50).map((text, i) => `
+      <div class="ls-panel-row">
+        <span class="ls-panel-index">${i + 1}</span>
+        <span class="ls-panel-text" title="${text.replace(/"/g, '&quot;')}">${text.slice(0, 120)}</span>
+      </div>
+    `).join('');
+
+    const overflow = data.length > 50
+      ? `<div class="ls-panel-overflow">+ ${data.length - 50} more — open extension popup to download all</div>`
+      : '';
+
+    panel.innerHTML = `
+      <div class="ls-panel-header">
+        <div class="ls-panel-title">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <rect x="1" y="1" width="12" height="12" rx="2.5" stroke="#63b3ed" stroke-width="1.4"/>
+            <line x1="4" y1="5" x2="10" y2="5" stroke="#63b3ed" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="4" y1="7.5" x2="10" y2="7.5" stroke="#63b3ed" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="4" y1="10" x2="8" y2="10" stroke="#63b3ed" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          <strong>${data.length} item${data.length !== 1 ? 's' : ''}</strong>
+          <span class="ls-panel-selector">${selector}</span>
+        </div>
+        <button class="ls-panel-close" id="ls-panel-close" title="Close">✕</button>
+      </div>
+      <div class="ls-panel-list">${rows}${overflow}</div>
+    `;
+
+    document.body.appendChild(panel);
+
+    requestAnimationFrame(() => panel.classList.add('ls-panel-visible'));
+
+    document.getElementById('ls-panel-close').addEventListener('click', () => {
+      panel.classList.remove('ls-panel-visible');
+      setTimeout(() => panel.remove(), 250);
+    });
+  }
+
+  function triggerReselect() {
+    isDone = false;
+    clearAllHighlights();
+    scrapedData = [];
+    document.getElementById('ls-panel')?.remove();
+
+    const banner = document.getElementById('ls-banner');
+    if (banner) {
+      banner.querySelector('.ls-banner-text').textContent = 'LocalScrape active — click any element';
+      banner.querySelector('.ls-banner-actions').innerHTML = `
+        <button class="ls-stop-btn" id="ls-stop-btn">Stop</button>
+      `;
+      document.getElementById('ls-stop-btn').addEventListener('click', () => cleanup());
+    }
+
+    showToast('Selection cleared — pick a new element', 2000);
   }
 
   function applyHover(el) {
@@ -163,15 +268,11 @@ function initScraper() {
 
     const count = scrapedData.length;
     showToast(
-      `<span class="ls-toast-count">${count}</span> element${count !== 1 ? 's' : ''} found — open LocalScrape to download`,
-      4000
+      `<span class="ls-toast-count">${count}</span> item${count !== 1 ? 's' : ''} extracted`,
+      3500
     );
 
-    const banner = document.getElementById('ls-banner');
-    if (banner) {
-      banner.querySelector('span').textContent =
-        `${count} item${count !== 1 ? 's' : ''} ready — open extension to download`;
-    }
+    updateBannerDone(count);
 
     chrome.runtime.sendMessage(
       { type: 'LS_DATA', data: scrapedData, selector },
@@ -186,14 +287,7 @@ function initScraper() {
 
     if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
       if (isDone) {
-        isDone = false;
-        clearAllHighlights();
-        scrapedData = [];
-        const banner = document.getElementById('ls-banner');
-        if (banner) {
-          banner.querySelector('span').textContent = 'LocalScrape active — click any element';
-        }
-        showToast('Selection cleared — pick a new element', 2000);
+        triggerReselect();
       }
     }
   }
@@ -207,6 +301,7 @@ function initScraper() {
     clearAllHighlights();
     removeBanner();
     document.getElementById('ls-toast')?.remove();
+    document.getElementById('ls-panel')?.remove();
     chrome.runtime.sendMessage({ type: 'LS_STOPPED' }, () => void chrome.runtime.lastError);
   }
 

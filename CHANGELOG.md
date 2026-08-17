@@ -21,7 +21,8 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - File download via `chrome.downloads` through the background service worker.
 - `Escape` key stops scraping and removes all injected UI.
 - `Ctrl/Cmd+Z` clears the current selection and re-enables element picking.
-- Fixed top-right banner with pulsing dot and inline Stop button injected into the active tab.
+- Fixed top-right banner with pulsing dot, Open Selection (view in-page results),
+  Reselect (clear and pick again), and inline Stop buttons injected into the active tab.
 - Pill toast notification at the bottom of the page with extracted item count.
 - Double-injection guard via `window.__localScrapeActive`.
 - Popup state restoration via `LS_PING`: reopening the popup after a selection shows
