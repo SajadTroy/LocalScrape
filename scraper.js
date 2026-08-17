@@ -78,12 +78,12 @@ function initScraper() {
       <div class="ls-dot"></div>
       <span class="ls-banner-text">LocalScrape active — click any element</span>
       <div class="ls-banner-actions">
-        <button class="ls-stop-btn" id="ls-stop-btn">Stop</button>
+        <button class="ls-cancel-btn" id="ls-cancel-btn">Cancel</button>
       </div>
     `;
     document.body.appendChild(banner);
 
-    document.getElementById('ls-stop-btn').addEventListener('click', () => {
+    document.getElementById('ls-cancel-btn').addEventListener('click', () => {
       cleanup();
     });
   }
@@ -110,7 +110,7 @@ function initScraper() {
         </svg>
         Reselect
       </button>
-      <button class="ls-stop-btn" id="ls-stop-btn">Stop</button>
+      <button class="ls-cancel-btn" id="ls-cancel-btn">Cancel</button>
     `;
 
     let isPanelOpen = false;
@@ -141,7 +141,7 @@ function initScraper() {
       triggerReselect();
     });
 
-    document.getElementById('ls-stop-btn').addEventListener('click', () => {
+    document.getElementById('ls-cancel-btn').addEventListener('click', () => {
       cleanup();
     });
   }
@@ -211,33 +211,19 @@ function initScraper() {
     panel.innerHTML = `
       <div class="ls-panel-header">
         <div class="ls-panel-title">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <rect x="1" y="1" width="12" height="12" rx="2.5" stroke="#2970FF" stroke-width="1.4"/>
-            <line x1="4" y1="5" x2="10" y2="5" stroke="#2970FF" stroke-width="1.2" stroke-linecap="round"/>
-            <line x1="4" y1="7.5" x2="10" y2="7.5" stroke="#2970FF" stroke-width="1.2" stroke-linecap="round"/>
-            <line x1="4" y1="10" x2="8" y2="10" stroke="#2970FF" stroke-width="1.2" stroke-linecap="round"/>
-          </svg>
           <strong>${data.length} item${data.length !== 1 ? 's' : ''}</strong>
           <span class="ls-panel-selector">${selector}</span>
         </div>
-        <div class="ls-panel-actions">
-          <button class="ls-action-btn ls-download-csv" id="ls-dl-csv">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 15L12 3M12 15L8.5 11.5M12 15L15.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M20 21H4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            Download CSV
-          </button>
-          <button class="ls-action-btn ls-download-json" id="ls-dl-json">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 15L12 3M12 15L8.5 11.5M12 15L15.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M20 21H4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            Download JSON
-          </button>
-        </div>
       </div>
       <div class="ls-panel-list">${rows}${overflow}</div>
+      <div class="ls-panel-footer">
+        <button class="ls-action-btn ls-download-csv" id="ls-dl-csv">
+          Download CSV
+        </button>
+        <button class="ls-action-btn ls-download-json" id="ls-dl-json">
+          Download JSON
+        </button>
+      </div>
     `;
 
     document.body.appendChild(panel);
@@ -332,9 +318,11 @@ function initScraper() {
 
     const { selector, elements } = findSimilarElements(el);
 
-    scrapedData = elements
+    let rawData = elements
       .map(extractText)
       .filter(t => t.length > 0);
+      
+    scrapedData = [...new Set(rawData)];
 
     isDone = true;
 

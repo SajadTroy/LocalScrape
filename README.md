@@ -59,7 +59,7 @@ LocalScrape is a Chrome extension that lets you visually select elements on any 
 
 | Key | Action |
 |-----|--------|
-| `Escape` | Stop scraping and remove all highlights |
+| `Escape` | Cancel scraping and remove all highlights |
 | `Ctrl` / `Cmd` + `Z` | Undo selection and pick a different element |
 
 ---

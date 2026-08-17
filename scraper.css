@@ -94,7 +94,7 @@
   50%       { opacity: 0.5; transform: scale(0.75); }
 }
 
-#ls-banner .ls-stop-btn {
+#ls-banner .ls-cancel-btn {
   background: #FEF3F2;
   border: 1px solid #FECDCA;
   color: #B42318;
@@ -107,7 +107,7 @@
   transition: all 0.15s ease;
 }
 
-#ls-banner .ls-stop-btn:hover {
+#ls-banner .ls-cancel-btn:hover {
   background: #FEE4E2;
 }
 
@@ -205,10 +205,15 @@
   text-overflow: ellipsis;
 }
 
-.ls-panel-actions {
+.ls-panel-footer {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 1px solid #EAECF0;
+  background: #FFFFFF;
+  border-radius: 0 0 8px 8px;
 }
 
 .ls-panel-list {
