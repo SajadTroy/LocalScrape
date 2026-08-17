@@ -1,0 +1,23 @@
+# Ignore OS clutter
+.DS_Store
+Thumbs.db
+
+# Ignore editor configs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore node modules if any tooling is added
+node_modules/
+
+# Ignore packed extension files
+*.crx
+*.pem
+
+# Ignore zip bundles (create them fresh before each release)
+*.zip
+
+# Ignore env files
+.env
+.env.*

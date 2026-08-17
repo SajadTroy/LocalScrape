@@ -158,6 +158,12 @@ btnDownload.addEventListener('click', async () => {
 
 btnClear.addEventListener('click', () => resetUI());
 
+document.getElementById('btn-sponsor').addEventListener('click', (e) => {
+  e.preventDefault();
+  chrome.tabs.create({ url: 'https://github.com/sponsors/SajadTroy' });
+});
+
+
 chrome.runtime.onMessage.addListener((message) => {
   if (message.type === 'LS_DATA') {
     renderResults(message.data, message.selector);

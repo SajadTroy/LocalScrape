@@ -33,6 +33,8 @@
 LocalScrape/
 ├── .agents/
 │   └── AGENTS.md            # Project rules, structure reference, and file responsibilities for AI agents.
+├── .github/
+│   └── FUNDING.yml          # GitHub Sponsors configuration — links to SajadTroy's sponsor page.
 ├── icons/
 │   ├── icon16.png           # 16x16 extension icon used in the browser toolbar.
 │   ├── icon48.png           # 48x48 extension icon used in chrome://extensions/.
@@ -42,18 +44,26 @@ LocalScrape/
 ├── manifest.json            # Manifest V3 configuration. Declares name, permissions, icons,
 │                            # service worker, and action popup.
 ├── popup.css                # Styles for popup.html. Premium dark glassmorphism design with gradient
-│                            # buttons, pulsing status badge, results preview panel, and format toggle.
+│                            # buttons, pulsing status badge, results preview panel, format toggle,
+│                            # and a pink sponsor link button in the footer.
 ├── popup.html               # The extension popup. Shows instructions, extracted results preview,
-│                            # CSV/JSON format selector, and Start / Stop / Download / Clear buttons.
+│                            # CSV/JSON format selector, Start / Stop / Download / Clear buttons,
+│                            # and a "Support on GitHub" sponsor link in the footer.
 ├── popup.js                 # Controls popup UI state. Injects scraper.css and scraper.js into the
 │                            # active tab on Start, listens for LS_DATA / LS_PING responses to restore
-│                            # state when the popup is reopened, and triggers file download via background.js.
+│                            # state when the popup is reopened, triggers file download via background.js,
+│                            # and opens the GitHub Sponsors page via chrome.tabs.create.
 ├── scraper.css              # Injected into the active tab. Provides namespaced .ls-* styles for the
 │                            # blue hover outline, green selected outline, toast pill, and active banner.
-└── scraper.js               # Injected into the active tab. Handles mouseover highlight, click-to-extract,
-                             # CSS selector building, similar-element matching, text extraction,
-                             # rAF-batched DOM updates, Escape / Ctrl+Z keyboard shortcuts,
-                             # double-injection guard, and LS_PING / LS_STOP message handling.
+├── scraper.js               # Injected into the active tab. Handles mouseover highlight, click-to-extract,
+│                            # CSS selector building, similar-element matching, text extraction,
+│                            # rAF-batched DOM updates, Escape / Ctrl+Z keyboard shortcuts,
+│                            # double-injection guard, and LS_PING / LS_STOP message handling.
+├── .gitignore               # Excludes OS files, editor configs, packed artifacts, and zip bundles.
+├── CHANGELOG.md             # Version history documenting all notable changes to the extension.
+├── LICENSE                  # MIT License. Copyright SajadTroy 2026.
+└── README.md                # Project documentation. Covers features, installation, usage,
+                             # permissions, privacy policy, and GitHub Sponsors badge.
 ```
 
 ## File Responsibilities
@@ -65,6 +75,7 @@ Permissions currently in use:
 - `activeTab` — grants temporary access to the current tab when the user triggers the extension popup.
 - `scripting` — allows `chrome.scripting.executeScript` and `chrome.scripting.insertCSS` to inject `scraper.js` and `scraper.css`.
 - `downloads` — allows `chrome.downloads.download` in the service worker to save CSV and JSON files.
+- `tabs` — allows `chrome.tabs.create` in `popup.js` to open the GitHub Sponsors page in a new tab.
 
 ### `background.js`
 The extension's service worker. Must store no state in global variables (service workers are ephemeral).
