@@ -152,10 +152,10 @@
 /* ── Selection Panel ──────────────────────────────────────── */
 #ls-panel {
   position: fixed;
-  top: 84px;
+  top: 96px;
   right: 24px;
   width: 480px;
-  max-height: calc(100vh - 120px);
+  max-height: calc(100vh - 132px);
   z-index: 2147483646;
   background: #FCFCFD;
   border: 1px solid #D0D5DD;
