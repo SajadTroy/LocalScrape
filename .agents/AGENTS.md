@@ -65,7 +65,6 @@ Permissions currently in use:
 - `activeTab` — grants temporary access to the current tab when the user triggers the extension popup.
 - `scripting` — allows `chrome.scripting.executeScript` and `chrome.scripting.insertCSS` to inject `scraper.js` and `scraper.css`.
 - `downloads` — allows `chrome.downloads.download` in the service worker to save CSV and JSON files.
-- `tabs` — allows `chrome.tabs.create` in `popup.js` to open the GitHub Sponsors page in a new tab.
 
 ### `background.js`
 The extension's service worker. Must store no state in global variables (service workers are ephemeral).

@@ -5,6 +5,22 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.1.0] — 2026-08-18
+
+### Changed
+- **Major UI Overhaul**: Replaced the dark glassmorphism popup with a clean, flat, light-mode floating panel injected directly into the page.
+- Removed the extension popup entirely. The extension now activates instantly upon clicking the toolbar icon.
+- Download buttons (CSV/JSON) moved directly into the injected in-page panel.
+- Fixed a bug where the scraper would accidentally extract its own UI elements.
+- Renamed "Stop" button to "Cancel" for clarity.
+- Removed the `tabs` permission from `manifest.json` to comply with Chrome Web Store policies.
+
+### Added
+- "Support on GitHub" sponsor button added directly to the panel footer.
+- Duplicate removal: automatically filters out duplicate extracted values using JavaScript `Set`.
+
+---
+
 ## [1.0.0] — 2026-08-17
 
 ### Added
