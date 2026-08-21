@@ -226,12 +226,28 @@ function initScraper() {
           Sponsor
         </button>
         <div style="flex-grow: 1;"></div>
-        <button class="ls-action-btn ls-download-csv" id="ls-dl-csv">
-          Download CSV
-        </button>
-        <button class="ls-action-btn ls-download-json" id="ls-dl-json">
-          Download JSON
-        </button>
+        <div class="ls-btn-group">
+          <button class="ls-action-btn" id="ls-copy-csv" title="Copy CSV to Clipboard">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+          <button class="ls-action-btn ls-download-csv" id="ls-dl-csv">
+            Download CSV
+          </button>
+        </div>
+        <div class="ls-btn-group" style="margin-left: 8px;">
+          <button class="ls-action-btn" id="ls-copy-json" title="Copy JSON to Clipboard">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+          <button class="ls-action-btn ls-download-json" id="ls-dl-json">
+            Download JSON
+          </button>
+        </div>
       </div>
     `;
 
@@ -241,6 +257,17 @@ function initScraper() {
 
     document.getElementById('ls-dl-csv').addEventListener('click', () => triggerDownload('csv'));
     document.getElementById('ls-dl-json').addEventListener('click', () => triggerDownload('json'));
+    
+    document.getElementById('ls-copy-csv').addEventListener('click', () => {
+      const csvContent = scrapedData.map(text => `"${text.replace(/"/g, '""')}"`).join('\n');
+      navigator.clipboard.writeText(csvContent).then(() => showToast('Copied CSV to clipboard', 2000));
+    });
+    
+    document.getElementById('ls-copy-json').addEventListener('click', () => {
+      const jsonContent = JSON.stringify(scrapedData.map(text => ({ text })), null, 2);
+      navigator.clipboard.writeText(jsonContent).then(() => showToast('Copied JSON to clipboard', 2000));
+    });
+
     document.getElementById('ls-sponsor-btn').addEventListener('click', () => {
       chrome.runtime.sendMessage({ type: 'OPEN_SPONSOR' }, () => void chrome.runtime.lastError);
     });
@@ -321,9 +348,15 @@ function initScraper() {
   }
 
   function onClick(e) {
-    if (isDone) return;
     const el = e.target;
     if (isOwnElement(el)) return;
+
+    if (isDone) {
+      e.preventDefault();
+      e.stopPropagation();
+      triggerReselect();
+      return;
+    }
 
     e.preventDefault();
     e.stopPropagation();

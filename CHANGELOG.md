@@ -5,6 +5,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.1.1] — 2026-08-21
+
+### Added
+- Added "Copy to Clipboard" buttons for both CSV and JSON formats next to the download buttons.
+- Clicking the selected element again (or clicking anywhere else on the page) now instantly unselects it and clears the UI.
+
+---
+
 ## [1.1.0] — 2026-08-18
 
 ### Changed

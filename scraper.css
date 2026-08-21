@@ -146,6 +146,24 @@
   border-color: #98A2B3;
 }
 
+.ls-btn-group {
+  display: flex;
+  align-items: center;
+}
+
+.ls-btn-group .ls-action-btn:first-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: none;
+  padding-left: 10px;
+  padding-right: 8px;
+}
+
+.ls-btn-group .ls-action-btn:last-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
 #ls-banner .ls-open-btn {
   color: #2970FF;
   background: #EFF4FF;
