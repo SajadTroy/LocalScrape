@@ -31,3 +31,44 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     return true;
   }
 });
+
+function isRestrictedUrl(url) {
+  if (!url) return false;
+  return url.startsWith('chrome://') ||
+    url.startsWith('chrome-extension://') ||
+    url.startsWith('https://chrome.google.com/webstore') ||
+    url.startsWith('https://chromewebstore.google.com/');
+}
+
+function updateActionState(tabId, url) {
+  chrome.action.setPopup({
+    tabId: tabId,
+    popup: isRestrictedUrl(url) ? 'error.html' : ''
+  });
+}
+
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.tabs.query({}, (tabs) => {
+    for (const tab of tabs) {
+      if (tab.id && tab.url) {
+        updateActionState(tab.id, tab.url);
+      }
+    }
+  });
+});
+
+chrome.runtime.onStartup.addListener(() => {
+  chrome.tabs.query({}, (tabs) => {
+    for (const tab of tabs) {
+      if (tab.id && tab.url) {
+        updateActionState(tab.id, tab.url);
+      }
+    }
+  });
+});
+
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (changeInfo.url || tab.url) {
+    updateActionState(tabId, tab.url);
+  }
+});

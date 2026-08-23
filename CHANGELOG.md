@@ -5,6 +5,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.1.2] — 2026-08-23
+
+### Added
+- Implemented an `error.html` popup that appears when attempting to use the extension on restricted pages (e.g., `chrome://`, Chrome Web Store), preventing silent failures.
+- Re-added the `tabs` permission to dynamically check the current tab URL for restrictions and set the error popup accordingly.
+
+---
+
 ## [1.1.1] — 2026-08-21
 
 ### Added
