@@ -219,8 +219,8 @@ function initScraper() {
       </div>
       <div class="ls-panel-list">${rows}${overflow}</div>
       <div class="ls-panel-footer">
-        <button class="ls-action-btn ls-sponsor-btn" id="ls-sponsor-btn" title="Buy me a coffee" style="padding: 6px 12px; display: flex; align-items: center; justify-content: center;">
-          <svg width="73" height="16" viewBox="0 0 4169 913" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <button class="ls-action-btn ls-sponsor-btn" id="ls-sponsor-btn" title="Buy me a coffee" style="justify-content: center;">
+          <svg width="100" height="22" viewBox="0 0 4169 913" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M564.724 212.38L564.098 212.012L562.648 211.569C563.232 212.062 563.962 212.347 564.724 212.38V212.38Z" fill="#0D0C22"/>
             <path d="M573.852 277.606L573.152 277.802L573.852 277.606Z" fill="#0D0C22"/>
             <path d="M564.992 212.279C564.903 212.268 564.815 212.247 564.731 212.217C564.726 212.275 564.726 212.333 564.731 212.391C564.827 212.379 564.917 212.34 564.992 212.279V212.279Z" fill="#0D0C22"/>
