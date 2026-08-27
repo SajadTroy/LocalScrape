@@ -34,7 +34,7 @@ LocalScrape/
 ├── .agents/
 │   └── AGENTS.md            # Project rules, structure reference, and file responsibilities for AI agents.
 ├── .github/
-│   └── FUNDING.yml          # GitHub Sponsors configuration — links to SajadTroy's sponsor page.
+│   └── FUNDING.yml          # Funding configuration (GitHub Sponsors and Buy Me a Coffee).
 ├── icons/
 │   ├── icon16.png           # 16x16 extension icon used in the browser toolbar.
 │   ├── icon48.png           # 48x48 extension icon used in chrome://extensions/.
@@ -53,7 +53,7 @@ LocalScrape/
 ├── CHANGELOG.md             # Version history documenting all notable changes to the extension.
 ├── LICENSE                  # MIT License. Copyright SajadTroy 2026.
 └── README.md                # Project documentation. Covers features, installation, usage,
-                             # permissions, privacy policy, and GitHub Sponsors badge.
+                             # permissions, privacy policy, and Sponsor/Funding badges.
 ```
 
 ## File Responsibilities
