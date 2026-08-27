@@ -5,6 +5,16 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.1.3] — 2026-08-27
+
+### Changed
+- Replaced standard utility SVG icons with beautiful uniform icons from MynaUI for a cleaner, modern look.
+- Enforced a consistent 32px height across all action buttons in the injected panel for perfect visual alignment.
+- Significantly increased the width and scale of the "Buy Me a Coffee" sponsor button to make it more prominent and legible.
+- Removed redundant icons from the Download buttons in favor of clean text labels.
+
+---
+
 ## [1.1.2] — 2026-08-23
 
 ### Added
